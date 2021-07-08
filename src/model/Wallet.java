@@ -42,7 +42,7 @@ public class Wallet {
             return "No se puede superar el limite " + CAPACIDAD_MAXIMA;
         }
         saldo += value;
-        return "Transacción exitosa, nuevo saldo" + saldo;
+        return "Transacción exitosa, nuevo saldo " + saldo;
     }
 
     public String takeMoney(int value){
@@ -51,7 +51,7 @@ public class Wallet {
             return "Saldo insuficiente" ;
         }
         saldo -= value;
-        return "Transacción exitosa, nuevo saldo" + saldo;
+        return "Transacción exitosa, nuevo saldo " + saldo;
     }
 
     public String breakLimit(){
@@ -83,5 +83,15 @@ public class Wallet {
             return false;
         }
         return true;
+    }
+
+    public String compararCuenta(Wallet otraWallet){
+        if (saldo == otraWallet.getSaldo()){
+            return "Las cuentas tienen mismo saldo";
+        }
+        if (saldo > otraWallet.getSaldo()){
+            return "La primera cuenta es mayor.";
+        }
+        return "La segunda cuenta es mayor";
     }
 }

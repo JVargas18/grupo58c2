@@ -5,7 +5,7 @@ import model.Wallet;
 
 public class Vista {
     
-    public static void main(String[] args) {
+    public static void main2(String[] args) {
         
         try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
