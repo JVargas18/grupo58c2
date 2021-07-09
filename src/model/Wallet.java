@@ -1,7 +1,5 @@
 package model;
 
-import javax.lang.model.util.ElementScanner6;
-
 public class Wallet {
 
     public static final int CAPACIDAD_MAXIMA = 1000000;

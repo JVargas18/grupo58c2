@@ -4,7 +4,7 @@ import model.Client;
 
 public class VistaUser {
     
-    public static void main(String[] args) {
+    public static void main3(String[] args) {
         Client customer1 = new Client("Marco");
         Client customer2 = new Client("Raul");
         String response = customer1.getNombre();
