@@ -8,7 +8,7 @@ public class User {
         return estado;
     }
 
-    public String getNombre(){
+    public String getNombre() {
         return nombre;
     }
 
@@ -19,5 +19,4 @@ public class User {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
 }

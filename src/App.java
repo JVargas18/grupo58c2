@@ -21,6 +21,7 @@ public class App {
         resultado--; // resultado = resultado - 1
         resultado = -resultado;
         resultado = +resultado;
+        resultado += resultado; //resultado = resultado + resultado;
         //operadores logicos
         boolean respuesta = true;
         respuesta = 5 > 8;
