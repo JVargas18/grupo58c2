@@ -34,7 +34,6 @@ public class JavaMySQL {
             boolean valid = connect.isValid(3600);
             System.out.println(valid ? "Connected":"Failed");
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -48,35 +47,65 @@ public class JavaMySQL {
             user = prop.getProperty("user");
             password = prop.getProperty("password");
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }    
 
     public void insertUser(String nombre) {
         String sql = "INSERT INTO `users`(`name`, `user_status`) VALUES ('"+nombre+"',1)";
-        try {
-            Statement stmt = connect.createStatement();
-            stmt.executeUpdate(sql);
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        executeInsertStatement(sql);
+        insertWallet();
     }
 
+    public void insertWallet() {
+        String sql = "INSERT INTO `wallets`(`users_id`) SELECT MAX(id) FROM users";
+        executeInsertStatement(sql);
+    }
+
+    public void insertTransaction(int id, int type, int value) {
+        String sql = "INSERT INTO `transactions`(`saldo`, `transaction_type`, `wallet_id`) "+
+        "VALUES ("+value+","+type+","+id+")";
+        executeInsertStatement(sql);
+    }
+
+    public void  updateSaldoWallet(int saldo, int id) {
+        String sql = "UPDATE `wallets` SET saldo =" + saldo + " WHERE id =" + id;
+        executeInsertStatement(sql);
+    }
     public ResultSet getUsersDB() {
-        ResultSet rs = null;
         String sql = "SELECT * FROM users";
+        return executeQueryStatement(sql);
+    }
+
+    public ResultSet getWalletUser(int id) {
+        String sql = "SELECT * FROM wallets WHERE users_id = "+ id;
+        return executeQueryStatement(sql);
+    }
+
+    public ResultSet getWalletTransactions(int id) {
+        String sql = "SELECT * FROM transactions WHERE wallet_id = "+id;
+        return executeQueryStatement(sql);
+    }
+
+    public ResultSet executeQueryStatement(String sql){
+        ResultSet rs = null;
         try {
             Statement stmt = connect.createStatement();
             rs = stmt.executeQuery(sql);
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return rs;
+    }
+
+    public void executeInsertStatement(String sql) {
+        try {
+            Statement stmt = connect.createStatement();
+            stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
